@@ -1,3 +1,14 @@
+---
+title: "Goldbach Partitions"
+output: html_document
+date: '2022-05-06'
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
 library(schoolmath)
 
 gb_list <- function(n) {
@@ -28,7 +39,7 @@ gb_partition <- function(nmax) {
     x <- append(x,j)
     y <- append(y,length(gb_list(j)))
   }
-  plot(x,y, xlab = "even number", ylab = "numbers of partitions")
+  plot(x,y, pch = 20, xlab = "even number", ylab = "numbers of partitions")
 }
 
 complete <- function(nmax) {
@@ -36,7 +47,4 @@ complete <- function(nmax) {
   gb_partition(nmax)
 }
 
-complete(1000)
-
-
-
+complete(100000)
