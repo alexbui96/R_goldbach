@@ -28,15 +28,15 @@ gb_partition <- function(nmax) {
     x <- append(x,j)
     y <- append(y,length(gb_list(j)))
   }
-  plot(x,y, xlab = "even number", ylab = "numbers of partitions")
+  plot(x,y, xlab = "even numbers", ylab = "numbers of partitions")
 }
 
 complete <- function(nmax) {
-  print_gb(nmax)
+  #print_gb(nmax)
   gb_partition(nmax)
 }
 
-complete(1000)
+complete(10000)
 
 
 
