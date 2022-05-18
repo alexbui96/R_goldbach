@@ -6,7 +6,7 @@ gb_list <- function(n) {
   list <- primes(2,n/2)
   
   while (list[i] <= n/2) {
-    if (is.prim(n-list[i])){
+    if (is.prim(n-list[i])) {
       # add elements to list  
       list <- append(list, sprintf("(%d, %d)  ", list[i], n-list[i]))
     }
@@ -26,7 +26,7 @@ comb_count <- function(n) {
   count <- 0
   
   while (i <= n/2) {
-    if ((i> 1) && is.prim(i) && is.prim(n-i)){
+    if ((i> 1) && is.prim(i) && is.prim(n-i)) {
       count <- count + 1
     }
     i <- ifelse (n == 4, i+1, i+2)
@@ -34,14 +34,14 @@ comb_count <- function(n) {
   return(count)
 }
 
-gb_partition_frame <- function(nmax) {
+gb_partition_frame <- function(nmin, nmax) {
   x <- NULL
   y <- NULL
   frame <- NULL
-  for (j in seq(4,nmax,2)) {
+  for (j in seq(nmin,nmax,2)) {
     x <- append(x,j)
     y <- append(y,comb_count(j))
-    frame <- rbind(x,y)
+    frame <- cbind(x,y)
   }
   return(frame)
 }
@@ -61,4 +61,4 @@ complete <- function(nmax) {
   gb_partition_plot(nmax)
 }
 
-tabte <- gb_partition_frame(3000)
+temp <- comb_count(4)
