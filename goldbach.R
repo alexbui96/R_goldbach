@@ -3,14 +3,14 @@ library(schoolmath)
 gb_list <- function(n) {
   i <- 1
   #empty vector
-  list <- NULL
+  list <- primes(2,n/2)
   
-  while (i <= n/2) {
-    if ((i> 1) && is.prim(i) && is.prim(n-i)){
+  while (list[i] <= n/2) {
+    if (is.prim(n-list[i])){
       # add elements to list  
-      list <- append(list, sprintf("(%d, %d)  ", i, n-i))
+      list <- append(list, sprintf("(%d, %d)  ", list[i], n-list[i]))
     }
-    i <- ifelse (n == 4, i+1, i+2)
+    i <- i+1
   }
   return(list)
 }
@@ -21,22 +21,44 @@ print_gb <- function(nmax) {
   }
 }
 
-gb_partition <- function(nmax) {
+comb_count <- function(n) {
+  i <- 1
+  count <- 0
+  
+  while (i <= n/2) {
+    if ((i> 1) && is.prim(i) && is.prim(n-i)){
+      count <- count + 1
+    }
+    i <- ifelse (n == 4, i+1, i+2)
+  }
+  return(count)
+}
+
+gb_partition_frame <- function(nmax) {
+  x <- NULL
+  y <- NULL
+  frame <- NULL
+  for (j in seq(4,nmax,2)) {
+    x <- append(x,j)
+    y <- append(y,comb_count(j))
+    frame <- rbind(x,y)
+  }
+  return(frame)
+}
+
+gb_partition_plot <- function(nmax) {
   x <- NULL
   y <- NULL
   for (j in seq(4,nmax,2)) {
     x <- append(x,j)
-    y <- append(y,length(gb_list(j)))
+    y <- append(y,comb_count(j))
   }
   plot(x,y, xlab = "even numbers", ylab = "numbers of partitions")
 }
 
 complete <- function(nmax) {
-  #print_gb(nmax)
-  gb_partition(nmax)
+  print_gb(nmax)
+  gb_partition_plot(nmax)
 }
 
-complete(10000)
-
-
-
+tabte <- gb_partition_frame(3000)
