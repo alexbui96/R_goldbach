@@ -66,4 +66,4 @@ goldbach_partition_plot <- function(nmax) {
   plot(x,y, xlab = "even numbers", ylab = "numbers of partitions")
 }
 
-goldbach_partition_plot(100000)
+goldbach_partition_plot(1000)
